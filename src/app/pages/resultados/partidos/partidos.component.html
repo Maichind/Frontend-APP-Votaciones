@@ -1,0 +1,123 @@
+<!-- NAVBAR -->
+<div class="layout-topbar">
+    <a class="layout-topbar-logo">
+        <img class="p-link" (click)="router.navigate(['/home'])" src="assets/layout/images/esc.png">
+    </a>
+    <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:100px">
+        <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+            <li>
+                <a (click)="router.navigate(['/home'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                   <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/mesas'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                   <span>Mesas</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/candidatos'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Candidatos</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/reportes'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Resultados</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="layout-topbar-menu" ng-reflect-ng-class="[object Object]">
+        <button (click)="router.navigate(['/login'])" class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="">
+            <i class="pi pi-user"></i><span>Profile</span>
+        </button>
+        <button class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="/">
+            <i class="pi pi-cog"></i><span>Settings</span>
+        </button>
+    </div>
+</div>
+
+<div class="grid flex justify-content-center align-items-center">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <div id="mesas" class="px-4 lg:px-8 mt-10 lg:mx-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-normal text-900 mb-5 mt-7">Partidos</h2>
+                </div>
+                <!-- table -->
+                <div class="card">
+                    <p-table #dt [value]="partidos" [rows]="5" [paginator]="true" [globalFilterFields]="['_id','mesa','cedulas_inscritas']" [tableStyle]="{'min-width': '75rem'}"
+                         [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                        <ng-template pTemplate="caption">
+                            <div>
+                                <h5 class="m-0"></h5>
+                                <p-toolbar styleclass="mb-4" class="p-element p-1">
+                                    <!-- Agregar -->
+                                    <button pbutton="" (click)="showModalDialog()" pripple="" label="New" icon="pi pi-plus" class="p-element p-ripple p-button-success mr-2 p-button p-component">
+                                        <span class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true"></span>
+                                        <span class="p-button-label">New</span>
+                                        <span class="p-ink"></span>
+                                    </button>
+                                    
+                                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                                        <span class="p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Search..." />
+                                        </span>
+                                    </div>  
+                                </p-toolbar>  
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 4rem">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+                                <th pSortableColumn="_id" style="min-width:15rem">ID <p-sortIcon field="_id"></p-sortIcon></th>
+                                <th pSortableColumn="nombrePartido">Nombre <p-sortIcon field="nombrePartido"></p-sortIcon></th>
+                                <th pSortableColumn="lema" style="min-width:10rem">Lema <p-sortIcon field="lema"></p-sortIcon></th>
+                                <th pSortableColumn="opciones">Opciones <p-sortIcon field="opciones"></p-sortIcon></th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-partido>
+                            <tr>
+                                <td>
+                                    <p-tableCheckbox [value]="partido"></p-tableCheckbox>
+                                </td>
+                                <td>{{partido._id.$oid}}</td>
+                                <td>{{partido.nombrePartido}}</td>
+                                <td>{{partido.lema}}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary mr-2" (click)="editar(partido)"></button>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="eliminar(partido)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            <div class="flex align-items-center justify-content-between">
+                                In total there are {{partidos ? partidos.length : 0 }} partidos.
+                            </div>
+                        </ng-template>
+                    </p-table> 
+                </div>
+                <!-- Modal Add -->
+                <p-dialog header="Add Table" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}" [draggable]="false" [resizable]="false">
+                    <div class="field" class="mb-1">
+                        <form [formGroup]="partidoForm">
+                            <label for="nombrePartido" class="block text-900 font-medium mb-2">Nombre</label>
+                            <input id="nombrePartido" formControlName="nombrePartido" [(ngModel)]="partido.nombrePartido" type="nombrePartido" pInputText class="w-full mb-3">
+                            <label for="lema"  class="block text-900 font-medium mb-2">Lema</label>
+                            <input id="lema" formControlName="lema" [(ngModel)]="partido.lema" type="lema" pInputText class="w-full mb-3">
+                        </form>
+                    </div>    
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-times" (click)="displayModal=false" label="Cancel" styleClass="p-button-text"></p-button>
+                        <p-button icon="pi pi-check" (click)="agregar()" styleClass="p-button-primary">{{actionButton}}</p-button>
+                    </ng-template>
+                </p-dialog>
+            </div>
+        </div>
+    </div>
+</div>
+

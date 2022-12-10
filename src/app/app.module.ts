@@ -6,7 +6,7 @@ import { NotfoundComponent } from './demo/components/notfound/notfound.component
 import {CheckboxModule} from 'primeng/checkbox';
 import {PasswordModule} from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { HomeComponent } from './pages/seguridad/home/home.component';
@@ -28,7 +28,7 @@ import { ReportesComponent } from './pages/resultados/reportes/reportes.componen
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent, HomeComponent, MesasComponent, PartidosComponent, CandidatosComponent, ReportesComponent
+        AppComponent, NotfoundComponent, HomeComponent, MesasComponent, PartidosComponent, CandidatosComponent, ReportesComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -48,7 +48,8 @@ import { ReportesComponent } from './pages/resultados/reportes/reportes.componen
         HttpClientModule,
         ToolbarModule,
         DialogModule,
-        ToastModule
+        ToastModule,
+        ReactiveFormsModule
     ],
     providers: [
         { 

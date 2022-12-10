@@ -1,0 +1,118 @@
+<div id="home" class="landing-wrapper overflow-hidden">
+
+    <!-- NAVBAR -->
+    <div class="layout-topbar">
+        <a class="layout-topbar-logo">
+            <img src="assets/layout/images/esc.png">
+        </a>
+        <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:100px">
+            <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+                <li>
+                    <a (click)="router.navigate(['/mesas'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                       <span>Mesas</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="router.navigate(['/partidos'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                        <span>Partidos</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="router.navigate(['/candidatos'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                        <span>Candidatos</span>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="router.navigate(['/reportes'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                        <span>Resultados</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="layout-topbar-menu" ng-reflect-ng-class="[object Object]">
+            <button (click)="showModalDialog()" class="p-link layout-topbar-button">
+                <i class="pi pi-user"></i><span>Profile</span>
+            </button>
+            <p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '25vw'}" [draggable]="false" [resizable]="false">              
+                <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+                    <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                        <div class="text-center mb-5">
+                            <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+                            <span class="text-600 font-medium line-height-3">Don't have an account?</span>
+                            <a (click)="showModalDialog2()" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">¡Registrate!</a>
+                        </div>
+        
+                        <div>
+                            <label for="email" class="block text-900 font-medium mb-2">Email</label>
+                            <input id="email" type="email" [(ngModel)]="correo" pInputText class="w-full mb-3">
+                            <label for="password" class="block text-900 font-medium mb-2">Password</label>
+                            <input id="password" type="password" [(ngModel)]="contrasena" pInputText class="w-full mb-3">
+                            <div class="flex align-items-center justify-content-between mb-6">
+                                <div class="flex align-items-center">
+                                    <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
+                                    <label for="rememberme1">Remember me</label>
+                                </div>
+                                <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
+                            </div>
+                            <button type="submit" (click)="login()" pButton pRipple label="Log In" icon="pi pi-user" class="w-full"></button>
+                        </div>
+                    </div>
+                </div>
+            </p-dialog>
+
+            <p-dialog [(visible)]="displayModal2" [modal]="true" [style]="{width: '25vw'}" [draggable]="false" [resizable]="false">
+                <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+                    <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                        <div class="text-center mb-5">
+                            <div class="text-900 text-3xl font-medium mb-3">Sign Up</div>
+                        </div>
+        
+                        <div>
+                            <input id="name" type="name" placeholder="Full name" pInputText class="w-full p-2 md:w-20rem mb-3" style="padding:1rem"><br>
+                            <input id="email1" type="email" placeholder="Email address" pInputText class="w-full p-2 md:w-20rem mb-3" style="padding:1rem"><br>
+                            <input id="user" type="user" placeholder="User" pInputText class="w-full p-2 md:w-20rem mb-3" style="padding:1rem"><br>
+                            <p-password id="password" placeholder="Password" [toggleMask]="true" styleClass="mb-3" inputStyleClass="w-full p-2 md:w-20rem"></p-password><br>
+                            <button type="submit" pButton pRipple label="Sign Up" class="w-full p-3 md:w-20rem text-xl mt-3" (click)="register()"></button>
+                            <div class="flex align-items-center justify-content-between mb-4 gap-5">
+                                <div class="flex align-items-center">
+                                    <label for="rememberme1">¿Already a member?</label>
+                                </div>
+                                <a (click)="toLogin()" class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Log In</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-dialog>
+
+            <button class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="/">
+                <i class="pi pi-cog"></i><span>Settings</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <div id="home" class="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden mt-7 mb-5" 
+        style="background: radial-gradient(77.36% 57.52%, #EEEFAF 0%, #ad9ef1 100%); clip-path: ellipse(150% 87% at 93% 13%);">
+        <div class="mx-4 md:mx-8 mt-8">
+            <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Misión TIC 2022:<br>Desarrollo de Aplicaciones Web.</span>Universidad Nacional de Colombia</h1><br>
+            <p class="font-light block text-3xl line-height-3 md:mt-4 text-gray-700"></p><br><br><br>
+            <a href="https://www.cne.gov.co/elecciones/elecciones-2022" target="_blank">
+                <button pButton pRipple type="button" label="   Documentación Electoral" class=" pi pi-calendar-times p-button-rounded text-xl border-none mt-3 bg-#ad9ef1-500 font-light block line-height-3 px-3 text-white"></button>
+            </a>
+        </div>
+        <div class="flex justify-content-center md:justify-content-end">
+            <img src="assets/layout/images/log2.png" alt="Home Image" class="w-7 md:w-4">
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="bg-white-900 text-gray-900 p-2 flex justify-content-between lg:justify-content-center align-items-center flex-wrap">
+        <div class="font-bold mr-2">| Mind! Developer <i class="pi pi-check-circle"></i> |</div>
+        <div class="align-items-center hidden lg:flex">
+            <span class="font-bold">Puedes ver este y otros proyectos en mi</span>
+        </div>
+        <a class="flex align-items-center ml-2 mr-8">
+            <a class="text-black" href="#"><span class="underline font-bold">Portfolio.</span></a>
+        </a>
+    </div>
+</div>
