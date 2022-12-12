@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${this.miServicioSeguridad.usuarioSesionActiva.token}`
         }
       });
-      console.log(request)
+      //console.log(request)
     }
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {

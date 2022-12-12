@@ -45,7 +45,7 @@ export class SeguridadService {
   * @returns Respuesta HTTP la cual indica si el usuario tiene permiso de acceso
   */
   login(infoUsuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${environment.url_gateway}/login`, infoUsuario);    
+    return this.http.post<Usuario>("https://gateway-votaciones.onrender.com//login", infoUsuario);    
   }
   /**
   * Guarda los datos tales como el identificador

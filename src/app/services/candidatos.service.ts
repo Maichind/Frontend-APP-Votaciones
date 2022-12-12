@@ -11,21 +11,33 @@ export class CandidatosService {
 
   constructor(private http: HttpClient) { }
 
+  //PRODUCCIÓN
   listar(): Observable<Candidato[]> {
-    return this.http.get<Candidato[]>("http://127.0.0.1:9999/candidatos");
+    return this.http.get<Candidato[]>("https://resultados-app-votaciones.onrender.com/candidatos");
   }
-
   Crear(candidato : Candidato): Observable<Candidato[]>{
-    return this.http.post<Candidato[]>("http://127.0.0.1:9999/candidatos", candidato);
+    return this.http.post<Candidato[]>("https://resultados-app-votaciones.onrender.com/candidatos", candidato);
+  }
+  Update(id:string, data:Candidato) {
+    return this.http.put<Candidato>("https://resultados-app-votaciones.onrender.com/candidatos/update/"+id,data);
+  }
+  Delete(id:string){
+    return this.http.delete<Candidato>("https://resultados-app-votaciones.onrender.com/candidatos/delete/"+id);
   }
 
-  Update(id:string, data:Candidato) {
-    return this.http.put<Candidato>("http://127.0.0.1:9999/candidatos/update/"+id,data);
-  }
-  
-  Delete(id:string){
-    return this.http.delete<Candidato>("http://127.0.0.1:9999/candidatos/delete/"+id);
-  }
+  //LOCAL
+  // listar(): Observable<Candidato[]> {
+  //   return this.http.get<Candidato[]>("http://127.0.0.1:9999/candidatos");
+  // }
+  // Crear(candidato : Candidato): Observable<Candidato[]>{
+  //   return this.http.post<Candidato[]>("http://127.0.0.1:9999/candidatos", candidato);
+  // }
+  // Update(id:string, data:Candidato) {
+  //   return this.http.put<Candidato>("http://127.0.0.1:9999/candidatos/update/"+id,data);
+  // }
+  // Delete(id:string){
+  //   return this.http.delete<Candidato>("http://127.0.0.1:9999/candidatos/delete/"+id);
+  // }
 
   // listar(): Observable<Candidato[]> {
   //   return this.http.get<Candidato[]>(`${environment.url_gateway}/candidatos`);

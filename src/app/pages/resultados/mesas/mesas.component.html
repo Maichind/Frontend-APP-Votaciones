@@ -25,10 +25,15 @@
                     <span>Resultados</span>
                 </a>
             </li>
+            <li>
+                <a (click)="router.navigate(['/graficas'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Gráficas</span>
+                </a>
+            </li>
         </ul>
     </div>
     <div class="layout-topbar-menu" ng-reflect-ng-class="[object Object]">
-        <button (click)="router.navigate(['/login'])" class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="">
+        <button (click)="router.navigate(['/profile'])" class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="">
             <i class="pi pi-user"></i><span>Profile</span>
         </button>
         <button class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="/">
@@ -42,16 +47,16 @@
         <div class="card px-6 py-6">
             <div id="mesas" class="px-4 lg:px-8 mt-10 lg:mx-8">
                 <div class="text-center">
-                    <h2 class="text-4xl font-normal text-900 mb-5 mt-7">Mesas de Votación</h2>
+                    <h2 class="text-4xl font-normal text-900 mb-4 mt-6">Mesas de Votación</h2>
                 </div>
                 <!-- table -->
                 <div class="card">
-                    <p-table #dt [value]="mesas" [rows]="5" [paginator]="true" [globalFilterFields]="['_id','mesa','cedulas_inscritas']" [tableStyle]="{'min-width': '75rem'}"
-                         [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <p-table #dt [value]="mesas" [rows]="5" [paginator]="true" [globalFilterFields]="['_id','mesa','cedulas_inscritas']" [tableStyle]="{'min-width': '55rem'}"
+                         [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} Mesas" [showCurrentPageReport]="true">
                         <ng-template pTemplate="caption">
                             <div>
                                 <h5 class="m-0"></h5>
-                                <p-toolbar styleclass="mb-4" class="p-element p-1">
+                                <p-toolbar styleclass="mb-3" class="p-element p-1">
                                     <!-- Agregar -->
                                     <button pbutton="" (click)="showModalDialog()" pripple="" label="New" icon="pi pi-plus" class="p-element p-ripple p-button-success mr-2 p-button p-component">
                                         <span class="p-button-icon p-button-icon-left pi pi-plus" aria-hidden="true"></span>
@@ -73,11 +78,10 @@
                                 <th style="width: 4rem">
                                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                                 </th>
-                                <th pSortableColumn="_id" style="min-width:15rem">ID <p-sortIcon field="_id"></p-sortIcon></th>
+                                <!-- <th pSortableColumn="_id" style="min-width:15rem">ID <p-sortIcon field="_id"></p-sortIcon></th> -->
                                 <th pSortableColumn="mesa">Nombre <p-sortIcon field="mesa"></p-sortIcon></th>
-                                <th pSortableColumn="cedulas_inscritas" style="min-width:10rem">Cedulas inscritas <p-sortIcon field="cedulas_inscritas"></p-sortIcon></th>
+                                <th pSortableColumn="cedulas_inscritas" >Cedulas inscritas <p-sortIcon field="cedulas_inscritas"></p-sortIcon></th>
                                 <th pSortableColumn="opciones">Opciones <p-sortIcon field="opciones"></p-sortIcon></th>
-                                <th></th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-mesa>
@@ -85,7 +89,7 @@
                                 <td>
                                     <p-tableCheckbox [value]="mesa"></p-tableCheckbox>
                                 </td>
-                                <td>{{mesa._id.$oid}}</td>
+                                <!-- <td>{{mesa._id.$oid}}</td> -->
                                 <td>{{mesa.mesa}}</td>
                                 <td>{{mesa.cedulas_inscritas}}</td>
                                 <td>
@@ -94,18 +98,18 @@
                                 </td>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="summary">
+                        <!-- <ng-template pTemplate="summary">
                             <div class="flex align-items-center justify-content-between">
                                 In total there are {{mesas ? mesas.length : 0 }} mesas.
                             </div>
-                        </ng-template>
+                        </ng-template> -->
                     </p-table> 
                 </div>
                 <!-- Modal Add -->
-                <p-dialog header="Add Table" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}" [draggable]="false" [resizable]="false">
+                <p-dialog header={{actionButton2}} [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}" [draggable]="false" [resizable]="false">
                     <div class="field" class="mb-1">
                         <form [formGroup]="tableForm">
-                            <label for="mesa" class="block text-900 font-medium mb-2">Name</label>
+                            <label for="mesa" class="block text-900 font-medium mb-2">Nombre</label>
                             <input id="mesa" formControlName="mesa" [(ngModel)]="mesa.mesa" type="mesa" pInputText class="w-full mb-3">
                             <label for="cedula"  class="block text-900 font-medium mb-2">Cedulas inscritas</label>
                             <input id="cedulas_inscritas" formControlName="cedulas_inscritas" [(ngModel)]="mesa.cedulas_inscritas" type="cedula" pInputText class="w-full mb-3">

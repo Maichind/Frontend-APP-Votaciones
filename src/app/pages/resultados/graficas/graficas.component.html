@@ -1,0 +1,97 @@
+<!-- NAVBAR -->
+<div class="layout-topbar">
+    <a class="layout-topbar-logo">
+        <img class="p-link" (click)="router.navigate(['/home'])" src="assets/layout/images/esc.png">
+    </a>
+    <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top:100px">
+        <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
+            <li>
+                <a (click)="router.navigate(['/home'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                   <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/mesas'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                   <span>Mesas</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/partidos'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Partidos</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/candidatos'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Candidatos</span>
+                </a>
+            </li>
+            <li>
+                <a (click)="router.navigate(['/reportes'])" pRipple class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                    <span>Resultados</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="layout-topbar-menu" ng-reflect-ng-class="[object Object]">
+        <button (click)="router.navigate(['/profile'])" class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="">
+            <i class="pi pi-user"></i><span>Profile</span>
+        </button>
+        <button class="p-link layout-topbar-button" tabindex="0" ng-reflect-router-link="/">
+            <i class="pi pi-cog"></i><span>Settings</span>
+        </button>
+    </div>
+</div>
+
+<div class="grid flex justify-content-center align-items-center">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <div id="mesas" class="px-4 lg:px-8 mt-10 lg:mx-8">
+                <div class="text-center">
+                    <h2 class="text-4xl font-normal text-900 mb-3 mt-6">Gráficas de Resultados</h2>
+                </div>
+                <p-splitter [style]="{'height': '750px'}" [panelSizes]="[20,80]" [minSizes]="[10,0]" styleClass="mb-0">
+                    <ng-template pTemplate>
+                        <div class="col flex align-items-center justify-content-center">
+                            <p-card class="col flex align-items-center justify-content-center" header="Gustavo Petro" subheader="Pacto Histórico" [style]="{width: '380px'}">
+                                <ng-template pTemplate="header">
+                                    <img alt="Card" src="../../../../assets/petro.jpg">
+                                </ng-template>
+                            </p-card>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate>
+                        <p-splitter layout="vertical" [panelSizes]="[5,60]">
+                            <ng-template pTemplate>
+                                <div class="col flex justify-content-center mt-2">
+                                    <p-chart class="align-items-center mt-2" type="pie" [data]="data"  [style]="{'width': '65%'}"></p-chart>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate>
+                                <p-splitter [panelSizes]="[20,70]">
+                                    <ng-template pTemplate>
+                                        <div class="col flex align-items-center justify-content-center">
+                                            <div class="card" style="width: 99%">
+                                                <h5></h5>
+                                                <p-chart type="bar" [data]="multiAxisData"></p-chart>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-splitter>
+                            </ng-template>
+                        </p-splitter>
+                    </ng-template>
+                    <ng-template pTemplate>
+                        <div class="col flex align-items-center justify-content-center">
+                            <p-card class="col flex align-items-center justify-content-center" header="Rodolfo Hernández" subheader="Gobernantes Anticorrupción" [style]="{width: '380px'}">
+                                <ng-template pTemplate="header">
+                                    <img src="../../../../assets/rodolfo.jpg" alt="">
+                                </ng-template>
+                            </p-card>
+                        </div>
+                    </ng-template>
+                </p-splitter>
+            </div>
+        </div>
+    </div>
+</div>
+

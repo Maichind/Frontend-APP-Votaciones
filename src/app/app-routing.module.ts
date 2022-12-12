@@ -6,6 +6,7 @@ import { MesasComponent } from './pages/resultados/mesas/mesas.component';
 import { PartidosComponent } from './pages/resultados/partidos/partidos.component';
 import { CandidatosComponent } from './pages/resultados/candidatos/candidatos.component';
 import { ReportesComponent } from './pages/resultados/reportes/reportes.component';
+import { GraficasComponent } from './pages/resultados/graficas/graficas.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { ReportesComponent } from './pages/resultados/reportes/reportes.componen
             { path: 'partidos', component: PartidosComponent },
             { path: 'candidatos', component: CandidatosComponent },
             { path: 'reportes', component: ReportesComponent },
+            { path: 'graficas', component: GraficasComponent },
             { path: '**', redirectTo: '/notfound' },
         ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
     ],

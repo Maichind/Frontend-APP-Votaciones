@@ -21,6 +21,7 @@ export class MesasComponent implements OnInit {
 
   displayModal: boolean = false;
   actionButton : string = "";
+  actionButton2 : string = "";
   intentoEnvio: boolean = false;
     
   constructor(private formBuilder: FormBuilder, public miServicioMesas: MesaService, public router: Router) { }
@@ -34,6 +35,7 @@ export class MesasComponent implements OnInit {
   } 
 
   showModalDialog() {
+    this.actionButton2 = 'Agregar Mesa';
     this.actionButton = 'Save';
     this.displayModal = true;
   }
@@ -92,10 +94,11 @@ export class MesasComponent implements OnInit {
   }
   
   editar(row : any):void{
+    this.actionButton2 = 'Editar Mesa';
     this.actionButton = 'Update';
     this.displayModal = true;
     this.datam = row;
-    console.log(this.datam._id.$oid);
+    //console.log(this.datam._id.$oid);
   }
 
   eliminar(rowe : any): void{

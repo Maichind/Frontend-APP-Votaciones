@@ -16,10 +16,12 @@ export class CandidatosComponent implements OnInit {
   candidato: Candidato = new Candidato;
   datam: any;
   datad: any;
+  icon : any;
   candidatoForm! : FormGroup;
 
   displayModal: boolean = false;
   actionButton : string = "";
+  actionButton2 : string = "";
   intentoEnvio: boolean = false;
   
   constructor(private formBuilder: FormBuilder, public miServicioCandidatos: CandidatosService, public router: Router) { }
@@ -31,11 +33,13 @@ export class CandidatosComponent implements OnInit {
       cedula : ['', Validators.required],
       nombre : ['', Validators.required],
       apellido : ['', Validators.required],
-      partido : ['', Validators.required]
+      partido : ['', Validators.required],
+      segundaVuelta : ['', Validators.required]
     })
   } 
 
   showModalDialog() {
+    this.actionButton2 = 'Agregar candidato';
     this.actionButton = 'Save';
     this.displayModal = true;
   }
@@ -54,7 +58,7 @@ export class CandidatosComponent implements OnInit {
         next:()=>{
           Swal.fire( 
             'Creado', 
-            'la mesa ha sido agregada correctamente', 
+            'El candidato ha sido agregado correctamente', 
             'success'
           )
           this.displayModal = false;
@@ -76,7 +80,7 @@ export class CandidatosComponent implements OnInit {
           next:()=>{
             Swal.fire( 
               'Actualizado', 
-              'la mesa ha sido actualizada correctamente', 
+              'El candidato ha sido actualizado correctamente', 
               'success'
             )
             this.displayModal = false;
@@ -94,6 +98,7 @@ export class CandidatosComponent implements OnInit {
   }
   
   editar(row : any):void{
+    this.actionButton2 = 'Editar candidato';
     this.actionButton = 'Update';
     this.displayModal = true;
     this.datam = row;
@@ -103,8 +108,8 @@ export class CandidatosComponent implements OnInit {
   eliminar(rowe : any): void{
     console.log(rowe._id.$oid);
     Swal.fire({ 
-      title: 'Eliminar Mesa', 
-      text: "Está seguro que quiere eliminar la mesa?", 
+      title: 'Eliminar Candidato', 
+      text: "Está seguro que quiere eliminar el candidato?", 
       icon: 'warning', 
       showCancelButton: true, 
       confirmButtonColor: '#3085d6', 
@@ -115,7 +120,7 @@ export class CandidatosComponent implements OnInit {
           this.miServicioCandidatos.Delete(rowe._id.$oid).subscribe(data => { 
           Swal.fire( 
             'Eliminado!', 
-            'la mesa ha sido eliminada correctamente', 
+            'El candidato ha sido eliminado correctamente', 
             'success'
           ) 
           this.ngOnInit(); 
@@ -135,7 +140,7 @@ export class CandidatosComponent implements OnInit {
   validarDatos():boolean{ 
     this.intentoEnvio=true; 
     if(this.candidato.numero=="" || this.candidato.cedula=="" || this.candidato.nombre=="" || this.candidato.apellido==""
-        || this.candidato.partido==""){ 
+        || this.candidato.partido=="" || this.candidato.segundaVuelta==""){ 
       return false; 
     }else{ 
     return true; 

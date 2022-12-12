@@ -1,7 +1,8 @@
 export class Reporte {
     _id?:string;
     mesa?:string;
-    numeroCandidato?:string;
-    partido?:string;
+    nombre?:string;
     votos?:string;
+    nombre2?:string;
+    votos2?:string;
 }

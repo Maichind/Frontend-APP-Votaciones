@@ -11,21 +11,33 @@ export class ReportesService {
 
   constructor(public http: HttpClient) { }
 
+  //PRODUCCIÓN
   listar(): Observable<Reporte[]> {
-    return this.http.get<Reporte[]>("http://127.0.0.1:9999/resultados");
+    return this.http.get<Reporte[]>("https://resultados-app-votaciones.onrender.com/resultados");
   }
-
   Crear(resultado : Reporte): Observable<Reporte[]>{
-    return this.http.post<Reporte[]>("http://127.0.0.1:9999/resultados", resultado);
+    return this.http.post<Reporte[]>("https://resultados-app-votaciones.onrender.com/resultados", resultado);
+  }
+  Update(id:string, data:Reporte) {
+    return this.http.put<Reporte>("https://resultados-app-votaciones.onrender.com/resultados/update/"+id,data);
+  }
+  Delete(id:string){
+    return this.http.delete<Reporte>("https://resultados-app-votaciones.onrender.com/resultados/delete/"+id);
   }
 
-  Update(id:string, data:Reporte) {
-    return this.http.put<Reporte>("http://127.0.0.1:9999/resultados/update/"+id,data);
-  }
-  
-  Delete(id:string){
-    return this.http.delete<Reporte>("http://127.0.0.1:9999/resultados/delete/"+id);
-  }
+  // LOCAL
+  // listar(): Observable<Reporte[]> {
+  //   return this.http.get<Reporte[]>("http://127.0.0.1:9999/resultados");
+  // }
+  // Crear(resultado : Reporte): Observable<Reporte[]>{
+  //   return this.http.post<Reporte[]>("http://127.0.0.1:9999/resultados", resultado);
+  // }
+  // Update(id:string, data:Reporte) {
+  //   return this.http.put<Reporte>("http://127.0.0.1:9999/resultados/update/"+id,data);
+  // }
+  // Delete(id:string){
+  //   return this.http.delete<Reporte>("http://127.0.0.1:9999/resultados/delete/"+id);
+  // }
 
   // listar(): Observable<Reporte[]> {
   //   return this.http.get<Reporte[]>(`${environment.url_gateway}/reportes`);

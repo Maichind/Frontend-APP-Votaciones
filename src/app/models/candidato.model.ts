@@ -5,4 +5,5 @@ export class Candidato {
     nombre?:string;
     apellido?:string;
     partido?:string;
+    segundaVuelta?:string;
 }

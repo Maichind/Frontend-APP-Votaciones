@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   login():void{
+    this.displayModal = false;
     let elUsuario:Usuario={
       correo:this.correo,
       contrasena:this.contrasena,

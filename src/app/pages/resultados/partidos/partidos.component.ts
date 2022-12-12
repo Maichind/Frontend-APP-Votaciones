@@ -20,6 +20,7 @@ export class PartidosComponent implements OnInit {
 
   displayModal: boolean = false;
   actionButton : string = "";
+  actionButton2 : string = "";
   intentoEnvio: boolean = false;
     
   constructor(private formBuilder: FormBuilder, public miServicioPartidos: PartidosService, public router: Router) { }
@@ -33,6 +34,7 @@ export class PartidosComponent implements OnInit {
   } 
 
   showModalDialog() {
+    this.actionButton2 = 'Agregar Partido';
     this.actionButton = 'Save';
     this.displayModal = true;
   }
@@ -51,7 +53,7 @@ export class PartidosComponent implements OnInit {
         next:()=>{
           Swal.fire( 
             'Creado', 
-            'la mesa ha sido agregada correctamente', 
+            'El partido ha sido agregado correctamente', 
             'success'
           )
           this.displayModal = false;
@@ -73,7 +75,7 @@ export class PartidosComponent implements OnInit {
           next:()=>{
             Swal.fire( 
               'Actualizado', 
-              'la mesa ha sido actualizada correctamente', 
+              'El partido ha sido actualizado correctamente', 
               'success'
             )
             this.displayModal = false;
@@ -91,6 +93,7 @@ export class PartidosComponent implements OnInit {
   }
   
   editar(row : any):void{
+    this.actionButton2 = 'Editar Partido';
     this.actionButton = 'Update';
     this.displayModal = true;
     this.datam = row;
@@ -100,8 +103,8 @@ export class PartidosComponent implements OnInit {
   eliminar(rowe : any): void{
     console.log(rowe._id.$oid);
     Swal.fire({ 
-      title: 'Eliminar Mesa', 
-      text: "Está seguro que quiere eliminar la mesa?", 
+      title: 'Eliminar Partido', 
+      text: "Está seguro que quiere eliminar el partido?", 
       icon: 'warning', 
       showCancelButton: true, 
       confirmButtonColor: '#3085d6', 
@@ -112,7 +115,7 @@ export class PartidosComponent implements OnInit {
           this.miServicioPartidos.Delete(rowe._id.$oid).subscribe(data => { 
           Swal.fire( 
             'Eliminado!', 
-            'la mesa ha sido eliminada correctamente', 
+            'El partido ha sido eliminado correctamente', 
             'success'
           ) 
           this.ngOnInit(); 

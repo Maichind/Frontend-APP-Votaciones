@@ -20,8 +20,8 @@ export class ReportesComponent implements OnInit {
 
   displayModal: boolean = false;
   actionButton : string = "";
+  actionButton2 : string = "";
   intentoEnvio: boolean = false;
-  
   
   constructor(private formBuilder: FormBuilder, public miServicioReportes: ReportesService, public router: Router) { }
 
@@ -29,13 +29,15 @@ export class ReportesComponent implements OnInit {
     this.listar(); 
     this.resultadoForm = this.formBuilder.group({
       mesa : ['', Validators.required],
-      numeroCandidato : ['', Validators.required],
+      nombre : ['', Validators.required],
       votos : ['', Validators.required],
-      partido : ['', Validators.required]
+      nombre2 : ['', Validators.required],
+      votos2 : ['', Validators.required],
     })
   } 
 
   showModalDialog() {
+    this.actionButton2 = 'Agregar Reporte';
     this.actionButton = 'Save';
     this.displayModal = true;
   }
@@ -54,7 +56,7 @@ export class ReportesComponent implements OnInit {
         next:()=>{
           Swal.fire( 
             'Creado', 
-            'la mesa ha sido agregada correctamente', 
+            'el Reporte ha sido agregado correctamente', 
             'success'
           )
           this.displayModal = false;
@@ -76,7 +78,7 @@ export class ReportesComponent implements OnInit {
           next:()=>{
             Swal.fire( 
               'Actualizado', 
-              'la mesa ha sido actualizada correctamente', 
+              'el Reporte ha sido actualizado correctamente', 
               'success'
             )
             this.displayModal = false;
@@ -94,6 +96,7 @@ export class ReportesComponent implements OnInit {
   }
   
   editar(row : any):void{
+    this.actionButton2 = 'Editar Reporte';
     this.actionButton = 'Update';
     this.displayModal = true;
     this.datam = row;
@@ -103,8 +106,8 @@ export class ReportesComponent implements OnInit {
   eliminar(rowe : any): void{
     console.log(rowe._id.$oid);
     Swal.fire({ 
-      title: 'Eliminar Mesa', 
-      text: "Está seguro que quiere eliminar la mesa?", 
+      title: 'Eliminar Reporte', 
+      text: "Está seguro que quiere eliminar el Reporte?", 
       icon: 'warning', 
       showCancelButton: true, 
       confirmButtonColor: '#3085d6', 
@@ -115,7 +118,7 @@ export class ReportesComponent implements OnInit {
           this.miServicioReportes.Delete(rowe._id.$oid).subscribe(data => { 
           Swal.fire( 
             'Eliminado!', 
-            'la mesa ha sido eliminada correctamente', 
+            'el Reporte ha sido eliminado correctamente', 
             'success'
           ) 
           this.ngOnInit(); 
@@ -134,7 +137,7 @@ export class ReportesComponent implements OnInit {
 
   validarDatos():boolean{ 
     this.intentoEnvio=true; 
-    if(this.resultado.mesa=="" || this.resultado.numeroCandidato=="" || this.resultado.partido=="" || this.resultado.votos==""){ 
+    if(this.resultado.mesa=="" || this.resultado.nombre=="" || this.resultado.votos=="" || this.resultado.nombre2=="" || this.resultado.votos2==""){ 
       return false; 
     }else{ 
     return true; 

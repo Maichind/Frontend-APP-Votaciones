@@ -25,10 +25,13 @@ import { ToastModule } from 'primeng/toast';
 import { PartidosComponent } from './pages/resultados/partidos/partidos.component';
 import { CandidatosComponent } from './pages/resultados/candidatos/candidatos.component';
 import { ReportesComponent } from './pages/resultados/reportes/reportes.component';
+import {SplitterModule} from 'primeng/splitter';
+import {CardModule} from 'primeng/card';
+import { GraficasComponent } from "./pages/resultados/graficas/graficas.component"; 
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent, HomeComponent, MesasComponent, PartidosComponent, CandidatosComponent, ReportesComponent,
+        AppComponent, NotfoundComponent, HomeComponent, MesasComponent, PartidosComponent, CandidatosComponent, ReportesComponent, GraficasComponent
     ],
     imports: [
         AppRoutingModule,
@@ -49,7 +52,9 @@ import { ReportesComponent } from './pages/resultados/reportes/reportes.componen
         ToolbarModule,
         DialogModule,
         ToastModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SplitterModule,
+        CardModule
     ],
     providers: [
         { 
